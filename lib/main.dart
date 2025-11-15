@@ -1,43 +1,13 @@
+import 'package:doctor_planer/system_preference.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/services.dart';
-import 'home/home_page.dart';
-import 'patients/patient.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final List<Patient> patients = [
-  Patient(firstName: 'John', lastName: 'Doe'),
-  Patient(firstName: 'Jane', lastName: 'Doe'),
-  Patient(firstName: 'Ray', lastName: 'Alen'),
-  Patient(firstName: 'Tim', lastName: 'Cook'),
-  Patient(firstName: 'Alice', lastName: 'Star'),
-  Patient(firstName: 'Simon', lastName: 'Brown'),
-  Patient(firstName: 'Ellie', lastName: 'White'),
-  Patient(firstName: 'Sunny', lastName: 'Jonson'),
-  Patient(firstName: 'Lucy', lastName: 'Huston'),
-  Patient(firstName: 'Taylor', lastName: 'Smith'),
-  Patient(firstName: 'Betty', lastName: 'Black')
-];
+import 'doctor_planner_app.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
 
-  SystemChrome.setPreferredOrientations([
-    DeviceOrientation.portraitUp,
-    DeviceOrientation.portraitDown,
-  ]);
+  SystemPreference.load();
 
-  runApp(MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return CupertinoApp(
-      title: 'Doctor Planner',
-      theme: CupertinoThemeData(primaryColor: CupertinoColors.systemBlue),
-      home: HomePage(),
-      debugShowCheckedModeBanner: false,
-    );
-  }
+  runApp(ProviderScope(child: DoctorPlannerApp()));
 }

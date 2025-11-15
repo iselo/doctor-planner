@@ -11,20 +11,22 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  late CupertinoTabController _tabController;
   static const int _initialIndex = 0;
-  final List<Widget> _tabs = [PatientTabView(), AppointmentTabView()];
+
+  late CupertinoTabController _tabController;
+  late List<Widget> _tabs;
 
   @override
   void initState() {
     super.initState();
     _tabController = CupertinoTabController(initialIndex: _initialIndex);
+    _tabs = [PatientTabView(), AppointmentTabView()];
   }
 
   @override
   void dispose() {
     _tabController.dispose();
-    super.dispose(); //
+    super.dispose();
   }
 
   @override
@@ -45,9 +47,7 @@ class _HomePageState extends State<HomePage> {
       ),
       tabBuilder: (BuildContext context, int index) {
         return CupertinoTabView(
-          builder: (BuildContext context) {
-            return _tabs[index];
-          },
+          builder: (BuildContext context) => _tabs[index],
         );
       },
     );

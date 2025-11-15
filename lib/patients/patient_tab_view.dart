@@ -1,97 +1,147 @@
-import 'package:doctor_planer/main.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final class PatientTabView extends StatelessWidget {
+import '../cupertino_app_text_styles.dart';
+import '../data/app_database.dart';
+import '../data/database_provider.dart';
+import 'add_patient_page.dart';
+
+final class PatientTabView extends ConsumerWidget {
   const PatientTabView({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final patientService = ref.watch(
+      DatabaseProvider.instance().patientServiceProvider(),
+    );
     return CupertinoPageScaffold(
       child: SafeArea(
         top: false,
         bottom: true,
-        child: CustomScrollView(
-          physics: BouncingScrollPhysics(parent: ClampingScrollPhysics()),
-          slivers: [
-            CupertinoSliverNavigationBar.search(
-              bottomMode: NavigationBarBottomMode.always,
-              // backgroundColor: CupertinoColors.white.withAlpha(10),
-              stretch: true,
-              largeTitle: const Text('Patients'),
-              trailing: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  CupertinoButton(
-                    padding: EdgeInsets.zero,
-                    child: Icon(CupertinoIcons.line_horizontal_3_decrease),
-                    onPressed: () {},
-                  ),
-                  CupertinoButton(
-                    padding: EdgeInsets.zero,
-                    child: Icon(CupertinoIcons.add),
-                    onPressed: () {},
-                  ),
-                ],
+        child: StreamBuilder<List<Patient>>(
+          stream: patientService.watchAll(),
+          builder: (context, snapshot) {
+            if (!snapshot.hasData) {
+              return const Center(child: CupertinoActivityIndicator());
+            }
+            final patients = snapshot.data!;
+            return CustomScrollView(
+              physics: const BouncingScrollPhysics(
+                parent: ClampingScrollPhysics(),
               ),
-              onSearchableBottomTap: _onSearchableBottomTap,
-              searchField: CupertinoSearchTextField(
-                autofocus: true,
-                placeholder: 'Search',
-                onChanged: (String value) {},
-                onSubmitted: (String value) {},
-              ),
-            ),
-            SliverList(
-              delegate: SliverChildBuilderDelegate((context, index) {
-                final patient = patients[index];
-                final primaryColor = CupertinoTheme.of(context).primaryContrastingColor;
-                return Column(
-                  children: [
-                    CupertinoListTile(
-                        title:
-                        RichText(
-                          text: TextSpan(
-                            style: TextStyle(fontSize: 17.0),
-                            children: [
-                              TextSpan(text: '${patient.firstName} '),
-                              TextSpan(text: patient.firstName, style: TextStyle(fontWeight: FontWeight.bold)),
-                            ]
-                          ),
-                        )
-                    ),
-                    const Divider(
-                      height: 0.5,
-                      thickness: 0.5,
-                      indent: 16,
-                      endIndent: 16,
-                    ),
-                  ],
-                );
-              }, childCount: patients.length),
-            ),
-            SliverToBoxAdapter(
-              child: Padding(
-                padding: EdgeInsets.all(16.0),
-                child: Column(
-                  children: [
-                    Text(
-                      '179 Patients',
-                      style: TextStyle(
-                        color: CupertinoColors.secondaryLabel,
-                        fontSize: 20,
+              slivers: <Widget>[
+                CupertinoSliverNavigationBar.search(
+                  enableBackgroundFilterBlur: true,
+                  bottomMode: NavigationBarBottomMode.always,
+                  stretch: true,
+                  largeTitle: const Text('Patients'),
+                  trailing: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      CupertinoButton(
+                        padding: EdgeInsets.zero,
+                        child: const Icon(
+                          CupertinoIcons.line_horizontal_3_decrease,
+                        ),
+                        onPressed: () {},
                       ),
-                    ),
-                    SizedBox(height: 40.0),
-                  ],
+                      CupertinoButton(
+                          padding: EdgeInsets.zero,
+                          child: const Icon(CupertinoIcons.add),
+                          onPressed: () {
+                            Navigator.of(context).push(
+                              CupertinoPageRoute(
+                                fullscreenDialog: true, // Slide-up from bottom
+                                builder: (context) => AddPatientPage(),
+                              ),
+                            );
+                          },
+                      ),
+                    ],
+                  ),
+                  onSearchableBottomTap: _onSearchableBottomTap,
+                  searchField: CupertinoSearchTextField(
+                    style: CupertinoAppTextStyle.textStyle,
+                    placeholder: 'Search',
+                    onChanged: (String value) {},
+                    onSubmitted: (String value) {},
+                  ),
                 ),
-              ),
-            ),
-          ],
+
+                /// Patients list
+                SliverList(
+                  delegate: SliverChildBuilderDelegate((context, index) {
+                    final patient = patients[index];
+
+                    return Column(
+                      children: <Widget>[
+                        CupertinoListTile(
+                          title: RichText(
+                            text: TextSpan(
+                              style: CupertinoAppTextStyle.textStyle,
+                              children: [
+                                TextSpan(text: '${patient.firstName} '),
+                                TextSpan(
+                                  text: patient.lastName,
+                                  style: const TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              CupertinoPageRoute(
+                                builder: (_) =>
+                                const CupertinoAlertDialog(
+                                  content: Text("Patient tapped"),
+                                ),
+                              ),
+                            );
+                          },
+                        ),
+
+                        const Divider(
+                          height: 0.5,
+                          thickness: 0.5,
+                          indent: 16,
+                          endIndent: 16,
+                        ),
+                      ],
+                    );
+                  }, childCount: patients.length),
+                ),
+
+                /// Footer
+                SliverToBoxAdapter(
+                  child: Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Column(
+                      children: <Widget>[
+                        Text(
+                          '${patients.length} Patients',
+                          style: const TextStyle(
+                            letterSpacing: 0.4,
+                            color: CupertinoColors.secondaryLabel,
+                            fontSize: 20,
+                          ),
+                        ),
+                        const SizedBox(height: 40.0),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            );
+          },
         ),
       ),
     );
   }
 
   void _onSearchableBottomTap(bool value) {}
+
 }
