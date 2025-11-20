@@ -1,11 +1,11 @@
+import 'package:doctor_planer/patients/add_patient_sheet.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 import '../cupertino_app_text_styles.dart';
 import '../data/app_database.dart';
 import '../data/database_provider.dart';
-import 'add_patient_page.dart';
 
 final class PatientTabView extends ConsumerWidget {
   const PatientTabView({super.key});
@@ -50,11 +50,11 @@ final class PatientTabView extends ConsumerWidget {
                           padding: EdgeInsets.zero,
                           child: const Icon(CupertinoIcons.add),
                           onPressed: () {
-                            Navigator.of(context).push(
-                              CupertinoPageRoute(
-                                fullscreenDialog: true, // Slide-up from bottom
-                                builder: (context) => AddPatientPage(),
-                              ),
+                            showCupertinoModalBottomSheet(
+                                context: context,
+                                expand: true,
+                                enableDrag: false,
+                                builder: (context) => AddPatientSheet()
                             );
                           },
                       ),
@@ -76,7 +76,7 @@ final class PatientTabView extends ConsumerWidget {
 
                     return Column(
                       children: <Widget>[
-                        CupertinoListTile(
+                        CupertinoListTile.notched(
                           title: RichText(
                             text: TextSpan(
                               style: CupertinoAppTextStyle.textStyle,
@@ -104,12 +104,12 @@ final class PatientTabView extends ConsumerWidget {
                           },
                         ),
 
-                        const Divider(
-                          height: 0.5,
-                          thickness: 0.5,
-                          indent: 16,
-                          endIndent: 16,
-                        ),
+                        // const Divider(
+                        //   height: 0.5,
+                        //   thickness: 0.5,
+                        //   indent: 16,
+                        //   endIndent: 16,
+                        // ),
                       ],
                     );
                   }, childCount: patients.length),

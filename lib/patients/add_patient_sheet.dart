@@ -5,14 +5,14 @@ import 'package:uuid/uuid.dart';
 import '../data/database_provider.dart';
 import 'patient_model.dart';
 
-class AddPatientPage extends ConsumerStatefulWidget {
-  const AddPatientPage({super.key});
+class AddPatientSheet extends ConsumerStatefulWidget {
+  const AddPatientSheet({super.key});
 
   @override
-  ConsumerState<AddPatientPage> createState() => _AddPatientPageState();
+  ConsumerState<AddPatientSheet> createState() => _AddPatientSheetState();
 }
 
-class _AddPatientPageState extends ConsumerState<AddPatientPage> {
+class _AddPatientSheetState extends ConsumerState<AddPatientSheet> {
   final _firstNameController = TextEditingController();
   final _lastNameController = TextEditingController();
   final _phoneController = TextEditingController();
@@ -56,7 +56,7 @@ class _AddPatientPageState extends ConsumerState<AddPatientPage> {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              const SizedBox(height: 20),
+              // const SizedBox(height: 20),
               _buildTextField("First Name", _firstNameController),
               _buildTextField("Last Name", _lastNameController),
               _buildTextField(
@@ -72,10 +72,10 @@ class _AddPatientPageState extends ConsumerState<AddPatientPage> {
   }
 
   Widget _buildTextField(
-    String placeholder,
-    TextEditingController controller, {
-    TextInputType keyboardType = TextInputType.text,
-  }) {
+      String placeholder,
+      TextEditingController controller, {
+        TextInputType keyboardType = TextInputType.text,
+      }) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
       child: CupertinoTextField(
