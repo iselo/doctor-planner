@@ -1,4 +1,3 @@
-import 'package:doctor_planer/cupertino_app_text_styles.dart';
 import 'package:flutter/cupertino.dart';
 
 import 'home/home_page.dart';
@@ -14,12 +13,6 @@ class DoctorPlannerApp extends StatelessWidget {
       theme: CupertinoThemeData(
         primaryColor: CupertinoColors.systemBlue,
         brightness: Brightness.light,
-        textTheme: CupertinoTextThemeData(
-          textStyle: CupertinoAppTextStyle.textStyle,
-          navTitleTextStyle: CupertinoAppTextStyle.navTitle,
-          navLargeTitleTextStyle: CupertinoAppTextStyle.navLargeTitle,
-          tabLabelTextStyle: CupertinoAppTextStyle.tabLabel,
-        ),
       ),
       home: HomePage(),
       debugShowCheckedModeBanner: false,

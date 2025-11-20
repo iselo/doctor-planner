@@ -1,5 +1,6 @@
 import 'package:doctor_planer/patients/add_patient_sheet.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
@@ -76,7 +77,7 @@ final class PatientTabView extends ConsumerWidget {
 
                     return Column(
                       children: <Widget>[
-                        CupertinoListTile.notched(
+                        CupertinoListTile(
                           title: RichText(
                             text: TextSpan(
                               style: CupertinoAppTextStyle.textStyle,
@@ -104,12 +105,12 @@ final class PatientTabView extends ConsumerWidget {
                           },
                         ),
 
-                        // const Divider(
-                        //   height: 0.5,
-                        //   thickness: 0.5,
-                        //   indent: 16,
-                        //   endIndent: 16,
-                        // ),
+                        const Divider(
+                          height: 0.5,
+                          thickness: 0.5,
+                          indent: 16,
+                          endIndent: 16,
+                        ),
                       ],
                     );
                   }, childCount: patients.length),
