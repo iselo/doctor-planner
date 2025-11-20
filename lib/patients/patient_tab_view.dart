@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
-import '../cupertino_app_text_styles.dart';
 import '../data/app_database.dart';
 import '../data/database_provider.dart';
 
@@ -63,7 +62,6 @@ final class PatientTabView extends ConsumerWidget {
                   ),
                   onSearchableBottomTap: _onSearchableBottomTap,
                   searchField: CupertinoSearchTextField(
-                    style: CupertinoAppTextStyle.textStyle,
                     placeholder: 'Search',
                     onChanged: (String value) {},
                     onSubmitted: (String value) {},
@@ -80,7 +78,6 @@ final class PatientTabView extends ConsumerWidget {
                         CupertinoListTile(
                           title: RichText(
                             text: TextSpan(
-                              style: CupertinoAppTextStyle.textStyle,
                               children: [
                                 TextSpan(text: '${patient.firstName} '),
                                 TextSpan(
