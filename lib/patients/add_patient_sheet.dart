@@ -67,6 +67,7 @@ class _AddPatientSheetState extends ConsumerState<AddPatientSheet> {
           minChildSize: 0.4,
           builder: (context, controller) {
             return ListView(
+              physics: const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
               children: [
                 CupertinoFormSection(
                   children: [
