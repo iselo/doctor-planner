@@ -84,16 +84,20 @@ class _AddPatientSheetState extends ConsumerState<AddPatientSheet> {
             CupertinoFormSection(
               children: [
                 CupertinoFormRow(
-                  prefix: Icon(
-                    CupertinoIcons.add_circled_solid,
-                    color: CupertinoColors.systemGreen,
+                  prefix: GestureDetector(
+                    onTap: () => _showDatePicker(context),
+                    child: Icon(
+                      CupertinoIcons.add_circled_solid,
+                      color: CupertinoColors.systemGreen,
+                    ),
                   ),
                   child: GestureDetector(
                     onTap: () => _showDatePicker(context),
+                    behavior: HitTestBehavior.opaque,
                     child: Container(
                       alignment: Alignment.centerLeft,
                       padding: const EdgeInsets.symmetric(
-                        vertical: 8,
+                        vertical: 6,
                         horizontal: 16,
                       ),
                       child: Text(
@@ -119,6 +123,7 @@ class _AddPatientSheetState extends ConsumerState<AddPatientSheet> {
   }) {
     return CupertinoFormRow(
       child: CupertinoTextField(
+        padding: EdgeInsets.symmetric(vertical: 6),
         controller: controller,
         placeholder: placeholder,
         placeholderStyle: TextStyle(color: CupertinoColors.secondaryLabel),

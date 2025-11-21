@@ -22,7 +22,7 @@ help: ## Prints this help
 
 .PHONY: generate
 generate: ## Generate code (like Drift, freezed, json_serializable, etc.)
-	dart run build_runner build -barBackgroundColor-delete-conflicting-outputs
+	dart run build_runner build --delete-conflicting-outputs
 
 .PHONY: drift-worker
 drift-worker: ## Compiles web/drift_worker.dart
