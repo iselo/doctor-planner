@@ -52,6 +52,7 @@ class _AddPatientSheetState extends ConsumerState<AddPatientSheet> {
           child: Text(
             "Done",
             style: TextStyle(
+              fontWeight: FontWeight.w600,
               color: _isNameEmpty
                   ? CupertinoColors.inactiveGray
                   : CupertinoColors.activeBlue,
