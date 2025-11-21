@@ -14,6 +14,7 @@ class DoctorPlannerApp extends StatelessWidget {
         primaryColor: CupertinoColors.systemBlue,
         brightness: Brightness.light,
       ),
+      scrollBehavior: const CupertinoScrollBehavior(),
       home: HomePage(),
       debugShowCheckedModeBanner: false,
     );

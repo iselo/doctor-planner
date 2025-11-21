@@ -23,6 +23,17 @@ class _AddPatientSheetState extends ConsumerState<AddPatientSheet> {
   final _uuid = Uuid();
 
   @override
+  void initState() {
+    super.initState();
+    _firstNameController.addListener(() {
+      setState(() {});
+    });
+    _lastNameController.addListener(() {
+      setState(() {});
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     var locale = DateFormat.yMMMd(Localizations.localeOf(context).toString());
     return CupertinoPageScaffold(
@@ -30,15 +41,22 @@ class _AddPatientSheetState extends ConsumerState<AddPatientSheet> {
       navigationBar: CupertinoNavigationBar(
         leading: CupertinoButton(
           padding: EdgeInsets.zero,
-          onPressed: ()=> Navigator.of(context).pop(),
+          onPressed: () => CupertinoSheetRoute.popSheet(context),
           child: const Text("Cancel"),
         ),
         middle: const Text("New Patient"),
         // previousPageTitle: "Patients",
         trailing: CupertinoButton(
           padding: EdgeInsets.zero,
-          onPressed: _onSave,
-          child: const Text("Done"),
+          onPressed: _isNameEmpty ? null : _onSave,
+          child: Text(
+            "Done",
+            style: TextStyle(
+              color: _isNameEmpty
+                  ? CupertinoColors.inactiveGray
+                  : CupertinoColors.activeBlue,
+            ),
+          ),
         ),
       ),
       child: SafeArea(
@@ -65,20 +83,22 @@ class _AddPatientSheetState extends ConsumerState<AddPatientSheet> {
             CupertinoFormSection(
               children: [
                 CupertinoFormRow(
+                  prefix: Icon(
+                    CupertinoIcons.add_circled_solid,
+                    color: CupertinoColors.systemGreen,
+                  ),
                   child: GestureDetector(
                     onTap: () => _showDatePicker(context),
                     child: Container(
                       alignment: Alignment.centerLeft,
-                      padding: const EdgeInsets.symmetric(vertical: 8),
+                      padding: const EdgeInsets.symmetric(
+                        vertical: 8,
+                        horizontal: 16,
+                      ),
                       child: Text(
                         _selectedBirthday == null
                             ? "add birthday"
                             : locale.format(_selectedBirthday!),
-                        style: TextStyle(
-                          color: _selectedBirthday == null
-                              ? CupertinoColors.placeholderText
-                              : CupertinoColors.label,
-                        ),
                       ),
                     ),
                   ),
@@ -156,6 +176,12 @@ class _AddPatientSheetState extends ConsumerState<AddPatientSheet> {
 
     if (!mounted) return;
 
-    Navigator.of(context).pop();
+    CupertinoSheetRoute.popSheet(context);
+
+  }
+
+  bool get _isNameEmpty {
+    return _firstNameController.text.trim().isEmpty ||
+        _lastNameController.text.trim().isEmpty;
   }
 }

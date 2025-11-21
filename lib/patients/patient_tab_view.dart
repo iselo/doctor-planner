@@ -49,8 +49,9 @@ final class PatientTabView extends ConsumerWidget {
                         padding: EdgeInsets.zero,
                         child: const Icon(CupertinoIcons.add),
                         onPressed: () {
-                          showCupertinoSheet(
+                          showCupertinoSheet<void>(
                             context: context,
+                            useNestedNavigation: true,
                             builder: (BuildContext context) =>
                                 AddPatientSheet(),
                           );
