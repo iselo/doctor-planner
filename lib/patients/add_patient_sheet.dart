@@ -60,61 +60,53 @@ class _AddPatientSheetState extends ConsumerState<AddPatientSheet> {
         ),
       ),
       child: SafeArea(
-        child: DraggableScrollableSheet(
-          expand: false,
-          maxChildSize: 0.9,
-          initialChildSize: 0.6,
-          minChildSize: 0.4,
-          builder: (context, controller) {
-            return ListView(
-              physics: const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
+        child: ListView(
+          physics: const BouncingScrollPhysics(parent: ClampingScrollPhysics()),
+          children: [
+            CupertinoFormSection(
               children: [
-                CupertinoFormSection(
-                  children: [
-                    // const SizedBox(height: 20),
-                    _newCupertinoFormRow("First Name", _firstNameController),
-                    _newCupertinoFormRow("Last Name", _lastNameController),
-                  ],
-                ),
-                const SizedBox(height: sectionSpacing),
-                CupertinoFormSection(
-                  children: [
-                    _newCupertinoFormRow(
-                      "Phone Number",
-                      _phoneController,
-                      keyboardType: TextInputType.phone,
-                    ),
-                  ],
-                ),
-                const SizedBox(height: sectionSpacing),
-                CupertinoFormSection(
-                  children: [
-                    CupertinoFormRow(
-                      prefix: Icon(
-                        CupertinoIcons.add_circled_solid,
-                        color: CupertinoColors.systemGreen,
-                      ),
-                      child: GestureDetector(
-                        onTap: () => _showDatePicker(context),
-                        child: Container(
-                          alignment: Alignment.centerLeft,
-                          padding: const EdgeInsets.symmetric(
-                            vertical: 8,
-                            horizontal: 16,
-                          ),
-                          child: Text(
-                            _selectedBirthday == null
-                                ? "add birthday"
-                                : locale.format(_selectedBirthday!),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
+                // const SizedBox(height: 20),
+                _newCupertinoFormRow("First Name", _firstNameController),
+                _newCupertinoFormRow("Last Name", _lastNameController),
+              ],
+            ),
+            const SizedBox(height: sectionSpacing),
+            CupertinoFormSection(
+              children: [
+                _newCupertinoFormRow(
+                  "Phone Number",
+                  _phoneController,
+                  keyboardType: TextInputType.phone,
                 ),
               ],
-            );
-          },
+            ),
+            const SizedBox(height: sectionSpacing),
+            CupertinoFormSection(
+              children: [
+                CupertinoFormRow(
+                  prefix: Icon(
+                    CupertinoIcons.add_circled_solid,
+                    color: CupertinoColors.systemGreen,
+                  ),
+                  child: GestureDetector(
+                    onTap: () => _showDatePicker(context),
+                    child: Container(
+                      alignment: Alignment.centerLeft,
+                      padding: const EdgeInsets.symmetric(
+                        vertical: 8,
+                        horizontal: 16,
+                      ),
+                      child: Text(
+                        _selectedBirthday == null
+                            ? "add birthday"
+                            : locale.format(_selectedBirthday!),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ],
         ),
       ),
     );
