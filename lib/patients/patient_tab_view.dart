@@ -2,7 +2,6 @@ import 'package:doctor_planer/patients/add_patient_sheet.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 import '../data/app_database.dart';
 import '../data/database_provider.dart';
@@ -44,24 +43,18 @@ final class PatientTabView extends ConsumerWidget {
                         child: const Icon(
                           CupertinoIcons.line_horizontal_3_decrease,
                         ),
-                        onPressed: () {
-                          showCupertinoSheet(
-
-                              context: context,
-                              builder: (BuildContext context)  => AddPatientSheet());
-                        },
+                        onPressed: () {},
                       ),
                       CupertinoButton(
-                          padding: EdgeInsets.zero,
-                          child: const Icon(CupertinoIcons.add),
-                          onPressed: () {
-                            showCupertinoModalBottomSheet(
-                                context: context,
-                                expand: true,
-                                enableDrag: false,
-                                builder: (context) => AddPatientSheet()
-                            );
-                          },
+                        padding: EdgeInsets.zero,
+                        child: const Icon(CupertinoIcons.add),
+                        onPressed: () {
+                          showCupertinoSheet(
+                            context: context,
+                            builder: (BuildContext context) =>
+                                AddPatientSheet(),
+                          );
+                        },
                       ),
                     ],
                   ),
@@ -98,8 +91,7 @@ final class PatientTabView extends ConsumerWidget {
                             Navigator.push(
                               context,
                               CupertinoPageRoute(
-                                builder: (_) =>
-                                const CupertinoAlertDialog(
+                                builder: (_) => const CupertinoAlertDialog(
                                   content: Text("Patient tapped"),
                                 ),
                               ),
@@ -146,5 +138,4 @@ final class PatientTabView extends ConsumerWidget {
   }
 
   void _onSearchableBottomTap(bool value) {}
-
 }
