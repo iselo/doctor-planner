@@ -65,7 +65,6 @@ class _AddPatientSheetState extends ConsumerState<AddPatientSheet> {
           children: [
             CupertinoFormSection(
               children: [
-                // const SizedBox(height: 20),
                 _newCupertinoFormRow("First name", _firstNameController),
                 _newCupertinoFormRow("Last name", _lastNameController),
               ],
@@ -126,7 +125,9 @@ class _AddPatientSheetState extends ConsumerState<AddPatientSheet> {
         padding: EdgeInsets.symmetric(vertical: 6),
         controller: controller,
         placeholder: placeholder,
-        placeholderStyle: TextStyle(color: CupertinoColors.secondaryLabel),
+        placeholderStyle: CupertinoTheme.of(
+          context,
+        ).textTheme.textStyle.copyWith(color: CupertinoColors.secondaryLabel),
         keyboardType: keyboardType,
         clearButtonMode: OverlayVisibilityMode.editing,
         decoration: const BoxDecoration(),

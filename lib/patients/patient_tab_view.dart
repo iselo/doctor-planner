@@ -1,6 +1,5 @@
 import 'package:doctor_planer/patients/add_patient_sheet.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../data/app_database.dart';
@@ -14,6 +13,7 @@ final class PatientTabView extends ConsumerWidget {
     final patientService = ref.watch(
       DatabaseProvider.instance().patientServiceProvider(),
     );
+    final thickness = 1 / MediaQuery.of(context).devicePixelRatio;
     return CupertinoPageScaffold(
       child: SafeArea(
         top: false,
@@ -77,6 +77,9 @@ final class PatientTabView extends ConsumerWidget {
                         CupertinoListTile(
                           title: RichText(
                             text: TextSpan(
+                              style: CupertinoTheme.of(
+                                context,
+                              ).textTheme.textStyle,
                               children: [
                                 TextSpan(text: '${patient.firstName} '),
                                 TextSpan(
@@ -100,11 +103,12 @@ final class PatientTabView extends ConsumerWidget {
                           },
                         ),
 
-                        const Divider(
-                          height: 0.5,
-                          thickness: 0.5,
-                          indent: 16,
-                          endIndent: 16,
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 16),
+                          child: Container(
+                            height: thickness,
+                            color: Color(0x4A3C3C43),
+                          ),
                         ),
                       ],
                     );
@@ -119,11 +123,11 @@ final class PatientTabView extends ConsumerWidget {
                       children: <Widget>[
                         Text(
                           '${patients.length} Patients',
-                          style: const TextStyle(
-                            letterSpacing: 0.4,
-                            color: CupertinoColors.secondaryLabel,
-                            fontSize: 20,
-                          ),
+                          style: CupertinoTheme.of(context).textTheme.textStyle
+                              .copyWith(
+                                color: CupertinoColors.secondaryLabel,
+                                fontSize: 20,
+                              ),
                         ),
                         const SizedBox(height: 40.0),
                       ],

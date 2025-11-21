@@ -13,8 +13,17 @@ class DoctorPlannerApp extends StatelessWidget {
       theme: CupertinoThemeData(
         primaryColor: CupertinoColors.systemBlue,
         brightness: Brightness.light,
+        textTheme: CupertinoTextThemeData(
+          textStyle: const TextStyle(
+            fontSize: 17,
+            fontWeight: FontWeight.w400,
+            letterSpacing: -0.41,
+            height: 1.2,
+          ),
+        ),
       ),
       scrollBehavior: const CupertinoScrollBehavior(),
+
       home: HomePage(),
       debugShowCheckedModeBanner: false,
     );
