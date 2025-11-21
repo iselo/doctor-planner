@@ -14,7 +14,7 @@ class AddPatientSheet extends ConsumerStatefulWidget {
 }
 
 class _AddPatientSheetState extends ConsumerState<AddPatientSheet> {
-  static const double sectionSpacing = 16.0;
+  static const double sectionSpacing = 24.0;
 
   final _firstNameController = TextEditingController();
   final _lastNameController = TextEditingController();
@@ -28,6 +28,11 @@ class _AddPatientSheetState extends ConsumerState<AddPatientSheet> {
     return CupertinoPageScaffold(
       backgroundColor: CupertinoColors.systemGrey6,
       navigationBar: CupertinoNavigationBar(
+        leading: CupertinoButton(
+          padding: EdgeInsets.zero,
+          onPressed: ()=> Navigator.of(context).pop(),
+          child: const Text("Cancel"),
+        ),
         middle: const Text("New Patient"),
         // previousPageTitle: "Patients",
         trailing: CupertinoButton(
@@ -65,8 +70,7 @@ class _AddPatientSheetState extends ConsumerState<AddPatientSheet> {
                     child: Container(
                       alignment: Alignment.centerLeft,
                       padding: const EdgeInsets.symmetric(vertical: 8),
-                      child:
-                      Text(
+                      child: Text(
                         _selectedBirthday == null
                             ? "add birthday"
                             : locale.format(_selectedBirthday!),

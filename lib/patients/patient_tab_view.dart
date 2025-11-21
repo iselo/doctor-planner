@@ -44,7 +44,12 @@ final class PatientTabView extends ConsumerWidget {
                         child: const Icon(
                           CupertinoIcons.line_horizontal_3_decrease,
                         ),
-                        onPressed: () {},
+                        onPressed: () {
+                          showCupertinoSheet(
+
+                              context: context,
+                              builder: (BuildContext context)  => AddPatientSheet());
+                        },
                       ),
                       CupertinoButton(
                           padding: EdgeInsets.zero,
