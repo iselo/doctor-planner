@@ -27,7 +27,9 @@ class _AddPatientSheetState extends ConsumerState<AddPatientSheet> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      _focusNode.requestFocus();
+      Future.delayed(const Duration(milliseconds: 200), () {
+        _focusNode.requestFocus();
+      });
     });
     _firstNameController.addListener(() {
       setState(() {});
@@ -35,6 +37,14 @@ class _AddPatientSheetState extends ConsumerState<AddPatientSheet> {
     _lastNameController.addListener(() {
       setState(() {});
     });
+  }
+
+  @override
+  void dispose() {
+    _focusNode.dispose();
+    _firstNameController.dispose();
+    _lastNameController.dispose();
+    super.dispose();
   }
 
   @override
