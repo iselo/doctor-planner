@@ -1,4 +1,5 @@
 import 'package:doctor_planer/patients/add_patient_sheet.dart';
+import 'package:doctor_planer/patients/view_patient_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -92,12 +93,9 @@ final class PatientTabView extends ConsumerWidget {
                             ),
                           ),
                           onTap: () {
-                            Navigator.push(
-                              context,
+                            Navigator.of(context).push(
                               CupertinoPageRoute(
-                                builder: (_) => const CupertinoAlertDialog(
-                                  content: Text("Patient tapped"),
-                                ),
+                                builder: (context) => const ViewPatientPage(),
                               ),
                             );
                           },

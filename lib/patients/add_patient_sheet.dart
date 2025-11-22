@@ -19,12 +19,16 @@ class _AddPatientSheetState extends ConsumerState<AddPatientSheet> {
   final _firstNameController = TextEditingController();
   final _lastNameController = TextEditingController();
   final _phoneController = TextEditingController();
+  final _focusNode = FocusNode();
   DateTime? _selectedBirthday;
   final _uuid = Uuid();
 
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _focusNode.requestFocus();
+    });
     _firstNameController.addListener(() {
       setState(() {});
     });
@@ -66,7 +70,11 @@ class _AddPatientSheetState extends ConsumerState<AddPatientSheet> {
           children: [
             CupertinoFormSection(
               children: [
-                _newCupertinoFormRow("First name", _firstNameController),
+                _newCupertinoFormRow(
+                  "First name",
+                  _firstNameController,
+                  focusNode: _focusNode,
+                ),
                 _newCupertinoFormRow("Last name", _lastNameController),
               ],
             ),
@@ -120,6 +128,7 @@ class _AddPatientSheetState extends ConsumerState<AddPatientSheet> {
     String placeholder,
     TextEditingController controller, {
     TextInputType keyboardType = TextInputType.text,
+    focusNode,
   }) {
     return CupertinoFormRow(
       child: CupertinoTextField(
@@ -132,6 +141,7 @@ class _AddPatientSheetState extends ConsumerState<AddPatientSheet> {
         keyboardType: keyboardType,
         clearButtonMode: OverlayVisibilityMode.editing,
         decoration: const BoxDecoration(),
+        focusNode: focusNode,
       ),
     );
   }
