@@ -26,16 +26,16 @@ class _AddPatientSheetState extends ConsumerState<AddPatientSheet> {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      Future.delayed(const Duration(milliseconds: 200), () {
-        _focusNode.requestFocus();
-      });
-    });
     _firstNameController.addListener(() {
       setState(() {});
     });
     _lastNameController.addListener(() {
       setState(() {});
+    });
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      await Future.delayed(const Duration(seconds: 1));
+      if (!mounted) return;
+      _focusNode.requestFocus();
     });
   }
 
