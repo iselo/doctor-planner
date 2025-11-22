@@ -95,7 +95,7 @@ final class PatientTabView extends ConsumerWidget {
                           onTap: () {
                             Navigator.of(context).push(
                               CupertinoPageRoute(
-                                builder: (context) => const ViewPatientPage(),
+                                builder: (context) => ViewPatientPage(patientId:patient.id),
                               ),
                             );
                           },

@@ -17,8 +17,7 @@ class PatientsDao extends DatabaseAccessor<AppDatabase>
 
   /// Obtains a single patient by given id
   Future<Patient?> findPatientById(String id) {
-    final selectStatement = (select(patients)
-      ..where((p) => p.id.equals(id)));
+    final selectStatement = (select(patients)..where((p) => p.id.equals(id)));
     return selectStatement.getSingleOrNull();
   }
 
@@ -28,11 +27,19 @@ class PatientsDao extends DatabaseAccessor<AppDatabase>
       ..where((p) => p.id.equals(patient.id.value)));
     return updateStatement.write(patient);
   }
+
   /// Delete patient by given id
   Future<int> deletePatient(String id) {
     final deleteStatement = (delete(db.patients)
       ..where((p) => p.id.equals(id)));
     return deleteStatement.go();
+  }
+
+  /// Watch a single contact by given id
+  Stream<Patient> watchPatientById(String id) {
+    return (select(
+      db.patients,
+    )..where((tbl) => tbl.id.equals(id))).watchSingle();
   }
 
   /// Watch all patients as a stream (reactive)

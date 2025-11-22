@@ -32,6 +32,11 @@ final class DatabaseProvider {
     return PatientService(repository);
   });
 
+  late final patientStreamProvider = StreamProvider.family<Patient, String>((
+      ref, id) {
+    final patientService = ref.watch(_patientServiceProvider);
+    return patientService.watchPatientById(id);
+  });
 
   DatabaseProvider._private();
 

@@ -26,6 +26,10 @@ final class PatientService {
     return repository.remove(id);
   }
 
+  Stream<Patient> watchPatientById(String id) {
+    return repository.watchPatientById(id);
+  }
+
   Stream<List<Patient>> watchAll() {
     return repository.watchAll();
   }

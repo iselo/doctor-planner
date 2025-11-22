@@ -15,5 +15,7 @@ final class PatientRepository {
 
   Future<void> remove(String id) => _dao.deletePatient(id);
 
+  Stream<Patient> watchPatientById(String id) => _dao.watchPatientById(id);
+
   Stream<List<Patient>> watchAll() => _dao.watchAllPatients();
 }
