@@ -32,16 +32,16 @@ class ViewPatientPage extends ConsumerWidget {
                   child: Text("Edit"),
                 ),
               ),
-              SliverToBoxAdapter(
-                child: Column(
-                  children: [
+              SliverList(
+                delegate: SliverChildListDelegate([
+                  if (patient.phoneNumber?.isNotEmpty ?? false)
                     CupertinoListSection.insetGrouped(
                       children: [
                         CupertinoListTile(
                           padding: EdgeInsets.all(16),
-                          title: Text("birthday"),
+                          title: Text("phone number"),
                           subtitle: Text(
-                            "16 October 2000",
+                            patient.phoneNumber!,
                             style: CupertinoTheme.of(context)
                                 .textTheme
                                 .textStyle
@@ -50,83 +50,71 @@ class ViewPatientPage extends ConsumerWidget {
                         ),
                       ],
                     ),
-                    CupertinoListSection.insetGrouped(
-                      children: [
-                        CupertinoListTile(
-                          title: Text(
-                            'Deactivate this Patient',
-                            style: CupertinoTheme.of(context)
-                                .textTheme
-                                .textStyle
-                                .copyWith(
-                                  color: CupertinoColors.destructiveRed,
-                                ),
-                          ),
+                  CupertinoListSection.insetGrouped(
+                    children: [
+                      CupertinoListTile(
+                        padding: EdgeInsets.all(16),
+                        title: Text("birthday"),
+                        subtitle: Text(
+                          "16 October 2000",
+                          style: CupertinoTheme.of(context).textTheme.textStyle
+                              .copyWith(color: CupertinoColors.link),
                         ),
-                      ],
-                    ),
-                    CupertinoListSection.insetGrouped(
-                      children: [
-                        CupertinoListTile(
-                          title: Text(
-                            'Deactivate this Patient',
-                            style: CupertinoTheme.of(context)
-                                .textTheme
-                                .textStyle
-                                .copyWith(
-                                  color: CupertinoColors.destructiveRed,
-                                ),
-                          ),
+                      ),
+                    ],
+                  ),
+                  CupertinoListSection.insetGrouped(
+                    children: [
+                      CupertinoListTile(
+                        padding: EdgeInsets.all(16),
+                        title: Text("another section"),
+                        subtitle: Text(
+                          "Some Data",
+                          style: CupertinoTheme.of(context).textTheme.textStyle
+                              .copyWith(color: CupertinoColors.link),
                         ),
-                      ],
-                    ),
-                    CupertinoListSection.insetGrouped(
-                      children: [
-                        CupertinoListTile(
-                          title: Text(
-                            'Deactivate this Patient',
-                            style: CupertinoTheme.of(context)
-                                .textTheme
-                                .textStyle
-                                .copyWith(
-                                  color: CupertinoColors.destructiveRed,
-                                ),
-                          ),
+                      ),
+                    ],
+                  ),
+                  CupertinoListSection.insetGrouped(
+                    children: [
+                      CupertinoListTile(
+                        padding: EdgeInsets.all(16),
+                        title: Text("another section"),
+                        subtitle: Text(
+                          "Some Data",
+                          style: CupertinoTheme.of(context).textTheme.textStyle
+                              .copyWith(color: CupertinoColors.link),
                         ),
-                      ],
-                    ),
-                    CupertinoListSection.insetGrouped(
-                      children: [
-                        CupertinoListTile(
-                          title: Text(
-                            'Deactivate this Patient',
-                            style: CupertinoTheme.of(context)
-                                .textTheme
-                                .textStyle
-                                .copyWith(
-                                  color: CupertinoColors.destructiveRed,
-                                ),
-                          ),
+                      ),
+                    ],
+                  ),
+                  CupertinoListSection.insetGrouped(
+                    children: [
+                      CupertinoListTile(
+                        padding: EdgeInsets.all(16),
+                        title: Text("another section"),
+                        subtitle: Text(
+                          "Some Data",
+                          style: CupertinoTheme.of(context).textTheme.textStyle
+                              .copyWith(color: CupertinoColors.link),
                         ),
-                      ],
-                    ),
-                    CupertinoListSection.insetGrouped(
-                      children: [
-                        CupertinoListTile(
-                          title: Text(
-                            'Deactivate this Patient',
-                            style: CupertinoTheme.of(context)
-                                .textTheme
-                                .textStyle
-                                .copyWith(
-                                  color: CupertinoColors.destructiveRed,
-                                ),
-                          ),
+                      ),
+                    ],
+                  ),
+                  CupertinoListSection.insetGrouped(
+                    children: [
+                      CupertinoListTile(
+                        title: Text(patient.isActive
+                            ?                          "Deactivate this Patient"
+                          :"Activate this Patient",
+                          style: CupertinoTheme.of(context).textTheme.textStyle
+                              .copyWith(color: CupertinoColors.destructiveRed),
                         ),
-                      ],
-                    ),
-                  ],
-                ),
+                      ),
+                    ],
+                  ),
+                ]),
               ),
             ],
           ),
