@@ -36,6 +36,7 @@ class ViewPatientPage extends ConsumerWidget {
                 delegate: SliverChildListDelegate([
                   if (patient.phoneNumber?.isNotEmpty ?? false)
                     CupertinoListSection.insetGrouped(
+                      margin: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                       children: [
                         CupertinoListTile(
                           padding: EdgeInsets.all(16),
@@ -51,6 +52,7 @@ class ViewPatientPage extends ConsumerWidget {
                       ],
                     ),
                   CupertinoListSection.insetGrouped(
+                    margin: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                     children: [
                       CupertinoListTile(
                         padding: EdgeInsets.all(16),
@@ -64,6 +66,21 @@ class ViewPatientPage extends ConsumerWidget {
                     ],
                   ),
                   CupertinoListSection.insetGrouped(
+                    margin: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                    children: [
+                      CupertinoListTile(
+                        padding: EdgeInsets.all(16),
+                        title: Text("section"),
+                        subtitle: Text(
+                          "Some Data",
+                          style: CupertinoTheme.of(context).textTheme.textStyle
+                              .copyWith(color: CupertinoColors.link),
+                        ),
+                      ),
+                    ],
+                  ),
+                  CupertinoListSection.insetGrouped(
+                    margin: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                     children: [
                       CupertinoListTile(
                         padding: EdgeInsets.all(16),
@@ -77,10 +94,11 @@ class ViewPatientPage extends ConsumerWidget {
                     ],
                   ),
                   CupertinoListSection.insetGrouped(
+                    margin: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                     children: [
                       CupertinoListTile(
                         padding: EdgeInsets.all(16),
-                        title: Text("another section"),
+                        title: Text("one more section"),
                         subtitle: Text(
                           "Some Data",
                           style: CupertinoTheme.of(context).textTheme.textStyle
@@ -90,24 +108,13 @@ class ViewPatientPage extends ConsumerWidget {
                     ],
                   ),
                   CupertinoListSection.insetGrouped(
+                    margin: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                     children: [
                       CupertinoListTile(
-                        padding: EdgeInsets.all(16),
-                        title: Text("another section"),
-                        subtitle: Text(
-                          "Some Data",
-                          style: CupertinoTheme.of(context).textTheme.textStyle
-                              .copyWith(color: CupertinoColors.link),
-                        ),
-                      ),
-                    ],
-                  ),
-                  CupertinoListSection.insetGrouped(
-                    children: [
-                      CupertinoListTile(
-                        title: Text(patient.isActive
-                            ?                          "Deactivate this Patient"
-                          :"Activate this Patient",
+                        title: Text(
+                          patient.isActive
+                              ? "Deactivate this Patient"
+                              : "Activate this Patient",
                           style: CupertinoTheme.of(context).textTheme.textStyle
                               .copyWith(color: CupertinoColors.destructiveRed),
                         ),
