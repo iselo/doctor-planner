@@ -9,9 +9,8 @@ class DoctorPlannerApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final l10nText = AppLocalizations.of(context)!;
     return CupertinoApp(
-      title: l10nText.doctorPlanner,
+      title: 'Doctor Planner',
       theme: CupertinoThemeData(
         primaryColor: CupertinoColors.systemBlue,
         brightness: Brightness.light,

@@ -10,9 +10,6 @@ class AppLocalizationsUk extends AppLocalizations {
   AppLocalizationsUk([String locale = 'uk']) : super(locale);
 
   @override
-  String get doctorPlanner => 'Doctor Planner';
-
-  @override
   String get cancel => 'Скасуваити';
 
   @override

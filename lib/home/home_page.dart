@@ -49,7 +49,8 @@ class _HomePageState extends State<HomePage> {
       ),
       tabBuilder: (BuildContext context, int index) {
         return CupertinoTabView(
-          builder: (BuildContext context) => _tabs[index],
+          builder: (BuildContext context) =>
+              SafeArea(bottom: false, child: _tabs[index]),
         );
       },
     );

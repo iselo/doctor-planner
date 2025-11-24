@@ -20,8 +20,6 @@ final class PatientTabView extends ConsumerWidget {
     final thickness = 1 / MediaQuery.of(context).devicePixelRatio;
     return CupertinoPageScaffold(
       child: SafeArea(
-        top: false,
-        bottom: true,
         child: StreamBuilder<List<Patient>>(
           stream: patientService.watchAll(),
           builder: (context, snapshot) {
