@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'home/home_page.dart';
 import 'l10n/app_localizations.dart';
@@ -9,8 +9,9 @@ class DoctorPlannerApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10nText = AppLocalizations.of(context)!;
     return CupertinoApp(
-      title: 'Doctor Planner',
+      title: l10nText.doctorPlanner,
       theme: CupertinoThemeData(
         primaryColor: CupertinoColors.systemBlue,
         brightness: Brightness.light,
@@ -27,12 +28,12 @@ class DoctorPlannerApp extends StatelessWidget {
       home: HomePage(),
       debugShowCheckedModeBanner: false,
       localizationsDelegates: [
-        DefaultWidgetsLocalizations.delegate,
-        DefaultCupertinoLocalizations.delegate,
-        DefaultMaterialLocalizations.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
         AppLocalizations.delegate,
       ],
-      supportedLocales: const [Locale('en'), Locale('uk')],
+      supportedLocales: const [Locale('en', 'US'), Locale('uk')],
       locale: null, // follow system locale,
     );
   }

@@ -95,6 +95,12 @@ abstract class AppLocalizations {
     Locale('uk')
   ];
 
+  /// No description provided for @doctorPlanner.
+  ///
+  /// In en, this message translates to:
+  /// **'Doctor Planner'**
+  String get doctorPlanner;
+
   /// No description provided for @cancel.
   ///
   /// In en, this message translates to:
