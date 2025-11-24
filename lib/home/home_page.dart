@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 
 import '../appointments/appointment_tab_view.dart';
+import '../l10n/app_localizations.dart';
 import '../patients/patient_tab_view.dart';
 
 class HomePage extends StatefulWidget {
@@ -31,17 +32,18 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final l10nText = AppLocalizations.of(context)!;
     return CupertinoTabScaffold(
       controller: _tabController,
       tabBar: CupertinoTabBar(
-        items: const <BottomNavigationBarItem>[
+        items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(CupertinoIcons.person_crop_circle_fill),
-            label: 'Patients',
+            icon: const Icon(CupertinoIcons.person_crop_circle_fill),
+            label: l10nText.patients,
           ),
           BottomNavigationBarItem(
             icon: Icon(CupertinoIcons.calendar_today),
-            label: 'Appointments',
+            label: l10nText.appointments,
           ),
         ],
       ),

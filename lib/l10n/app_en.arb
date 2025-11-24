@@ -1,0 +1,18 @@
+{
+  "@@locale": "en",
+  "cancel": "Cancel",
+  "done": "Done",
+  "edit": "Edit",
+  "search": "Search",
+  "patients": "Patients",
+  "newPatient": "New Patient",
+  "firstName": "First name",
+  "lastName": "Last name",
+  "phoneNumber": "Phone number",
+  "birthday": "birthday",
+  "addBirthday": "add birthday",
+  "activateThisPatient": "Activate this Patient",
+  "deactivateThisPatient": "Deactivate this Patient",
+  "appointments": "Appointments",
+  "error": "Error"
+}

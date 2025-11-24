@@ -1,0 +1,18 @@
+{
+  "@@locale": "uk",
+  "cancel": "Скасуваити",
+  "done": "Готово",
+  "edit": "Змінити",
+  "search": "Пошук",
+  "patients": "Пацієнти",
+  "newPatient": "Новий пацієнт",
+  "firstName": "Ім'я",
+  "lastName": "Прізвище",
+  "phoneNumber": "Телефон",
+  "birthday": "день народження",
+  "addBirthday": "додати день народження",
+  "activateThisPatient": "Активувати пацієнта",
+  "deactivateThisPatient": "Декативувати пацієнта",
+  "appointments": "Прийоми",
+  "error": "Помилка"
+}

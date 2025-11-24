@@ -28,6 +28,10 @@ generate: ## Generate code (like Drift, freezed, json_serializable, etc.)
 drift-worker: ## Compiles web/drift_worker.dart
 	dart compile js -O4 -o web/drift_worker.dart.js web/drift_worker.dart
 
+.PHONY: local
+local: ## Generates localizations
+	flutter gen-l10n
+
 .PHONY: web
 web: $(DOCS_DIR) ## Builds GH-PAGES
 	flutter build web --base-href ${BASE_HREF}

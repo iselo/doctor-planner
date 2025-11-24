@@ -5,12 +5,15 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../data/app_database.dart';
 import '../data/database_provider.dart';
+import '../l10n/app_localizations.dart';
 
 final class PatientTabView extends ConsumerWidget {
   const PatientTabView({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final l10nText = AppLocalizations.of(context)!;
+
     final patientService = ref.watch(
       DatabaseProvider.instance().patientServiceProvider(),
     );
@@ -35,7 +38,7 @@ final class PatientTabView extends ConsumerWidget {
                   enableBackgroundFilterBlur: true,
                   bottomMode: NavigationBarBottomMode.always,
                   stretch: true,
-                  largeTitle: const Text('Patients'),
+                  largeTitle: Text(l10nText.patients),
                   trailing: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
@@ -62,7 +65,7 @@ final class PatientTabView extends ConsumerWidget {
                   ),
                   onSearchableBottomTap: _onSearchableBottomTap,
                   searchField: CupertinoSearchTextField(
-                    placeholder: 'Search',
+                    placeholder: l10nText.search,
                     onChanged: (String value) {},
                     onSubmitted: (String value) {},
                   ),
@@ -95,7 +98,8 @@ final class PatientTabView extends ConsumerWidget {
                           onTap: () {
                             Navigator.of(context).push(
                               CupertinoPageRoute(
-                                builder: (context) => ViewPatientPage(patientId:patient.id),
+                                builder: (context) =>
+                                    ViewPatientPage(patientId: patient.id),
                               ),
                             );
                           },
@@ -120,7 +124,7 @@ final class PatientTabView extends ConsumerWidget {
                     child: Column(
                       children: <Widget>[
                         Text(
-                          '${patients.length} Patients',
+                          '${patients.length} ${l10nText.patients}',
                           style: CupertinoTheme.of(context).textTheme.textStyle
                               .copyWith(
                                 color: CupertinoColors.secondaryLabel,

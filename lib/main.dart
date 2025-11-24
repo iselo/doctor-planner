@@ -6,8 +6,6 @@ import 'doctor_planner_app.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-
   SystemPreference.load();
-
   runApp(ProviderScope(child: DoctorPlannerApp()));
 }

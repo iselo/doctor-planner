@@ -1,9 +1,10 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 import 'home/home_page.dart';
+import 'l10n/app_localizations.dart';
 
 class DoctorPlannerApp extends StatelessWidget {
-
   const DoctorPlannerApp({super.key});
 
   @override
@@ -23,9 +24,16 @@ class DoctorPlannerApp extends StatelessWidget {
         ),
       ),
       scrollBehavior: const CupertinoScrollBehavior(),
-
       home: HomePage(),
       debugShowCheckedModeBanner: false,
+      localizationsDelegates: [
+        DefaultWidgetsLocalizations.delegate,
+        DefaultCupertinoLocalizations.delegate,
+        DefaultMaterialLocalizations.delegate,
+        AppLocalizations.delegate,
+      ],
+      supportedLocales: const [Locale('en'), Locale('uk')],
+      locale: null, // follow system locale,
     );
   }
 }

@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../data/database_provider.dart';
+import '../l10n/app_localizations.dart';
 
 class ViewPatientPage extends ConsumerWidget {
   final String _patientId;
@@ -11,6 +12,7 @@ class ViewPatientPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final l10nText = AppLocalizations.of(context)!;
     final patientAsync = ref.watch(
       DatabaseProvider.instance().patientStreamProvider(_patientId),
     );
@@ -26,11 +28,11 @@ class ViewPatientPage extends ConsumerWidget {
               slivers: <Widget>[
                 CupertinoSliverNavigationBar(
                   largeTitle: Text('${patient.firstName} ${patient.lastName}'),
-                  previousPageTitle: 'Patients',
+                  previousPageTitle: l10nText.patients,
                   trailing: CupertinoButton(
                     padding: EdgeInsets.zero,
                     onPressed: () {},
-                    child: Text("Edit"),
+                    child: Text(l10nText.edit),
                   ),
                 ),
                 SliverList(
@@ -44,7 +46,7 @@ class ViewPatientPage extends ConsumerWidget {
                         children: [
                           CupertinoListTile(
                             padding: EdgeInsets.all(16),
-                            title: Text("phone number"),
+                            title: Text(l10nText.phoneNumber.toLowerCase()),
                             subtitle: Text(
                               patient.phoneNumber!,
                               style: CupertinoTheme.of(context)
@@ -60,7 +62,7 @@ class ViewPatientPage extends ConsumerWidget {
                       children: [
                         CupertinoListTile(
                           padding: EdgeInsets.all(16),
-                          title: Text("birthday"),
+                          title: Text(l10nText.birthday),
                           subtitle: Text(
                             "16 October 2000",
                             style: CupertinoTheme.of(context)
@@ -125,8 +127,8 @@ class ViewPatientPage extends ConsumerWidget {
                         CupertinoListTile(
                           title: Text(
                             patient.isActive
-                                ? "Deactivate this Patient"
-                                : "Activate this Patient",
+                                ? l10nText.deactivateThisPatient
+                                : l10nText.activateThisPatient,
                             style: CupertinoTheme.of(context)
                                 .textTheme
                                 .textStyle
@@ -145,7 +147,7 @@ class ViewPatientPage extends ConsumerWidget {
         );
       },
       loading: () => const Center(child: CupertinoActivityIndicator()),
-      error: (err, stack) => Center(child: Text('Error: $err')),
+      error: (err, stack) => Center(child: Text('${l10nText.error}: $err')),
     );
   }
 }

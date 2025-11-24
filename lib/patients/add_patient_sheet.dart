@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:uuid/uuid.dart';
 
 import '../data/database_provider.dart';
+import '../l10n/app_localizations.dart';
 import 'patient_model.dart';
 
 class AddPatientSheet extends ConsumerStatefulWidget {
@@ -26,12 +27,14 @@ class _AddPatientSheetState extends ConsumerState<AddPatientSheet> {
   @override
   void initState() {
     super.initState();
+
     _firstNameController.addListener(() {
       setState(() {});
     });
     _lastNameController.addListener(() {
       setState(() {});
     });
+
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       await Future.delayed(const Duration(seconds: 1));
       if (!mounted) return;
@@ -49,6 +52,7 @@ class _AddPatientSheetState extends ConsumerState<AddPatientSheet> {
 
   @override
   Widget build(BuildContext context) {
+    final l10nText = AppLocalizations.of(context)!;
     var locale = DateFormat.yMMMd(Localizations.localeOf(context).toString());
     return CupertinoPageScaffold(
       backgroundColor: CupertinoColors.systemGrey6,
@@ -56,15 +60,14 @@ class _AddPatientSheetState extends ConsumerState<AddPatientSheet> {
         leading: CupertinoButton(
           padding: EdgeInsets.zero,
           onPressed: () => CupertinoSheetRoute.popSheet(context),
-          child: const Text("Cancel"),
+          child: Text(l10nText.cancel),
         ),
-        middle: const Text("New Patient"),
-        // previousPageTitle: "Patients",
+        middle: Text(l10nText.newPatient),
         trailing: CupertinoButton(
           padding: EdgeInsets.zero,
           onPressed: _isNameEmpty ? null : _onSave,
           child: Text(
-            "Done",
+            l10nText.done,
             style: TextStyle(
               fontWeight: FontWeight.w600,
               color: _isNameEmpty
@@ -81,18 +84,18 @@ class _AddPatientSheetState extends ConsumerState<AddPatientSheet> {
             CupertinoFormSection(
               children: [
                 _newCupertinoFormRow(
-                  "First name",
+                  l10nText.firstName,
                   _firstNameController,
                   focusNode: _focusNode,
                 ),
-                _newCupertinoFormRow("Last name", _lastNameController),
+                _newCupertinoFormRow(l10nText.lastName, _lastNameController),
               ],
             ),
             const SizedBox(height: sectionSpacing),
             CupertinoFormSection(
               children: [
                 _newCupertinoFormRow(
-                  "Phone number",
+                  l10nText.phoneNumber,
                   _phoneController,
                   keyboardType: TextInputType.phone,
                 ),
@@ -120,7 +123,7 @@ class _AddPatientSheetState extends ConsumerState<AddPatientSheet> {
                       ),
                       child: Text(
                         _selectedBirthday == null
-                            ? "add birthday"
+                            ? l10nText.addBirthday
                             : locale.format(_selectedBirthday!),
                       ),
                     ),
