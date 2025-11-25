@@ -36,11 +36,9 @@ class _AddPatientSheetState extends ConsumerState<AddPatientSheet> {
       setState(() {});
     });
 
-    WidgetsBinding.instance.addPostFrameCallback((_) async {
-      await Future.delayed(const Duration(seconds: 1));
-      if (!mounted) return;
-      _focusNode.requestFocus();
-    });
+    WidgetsBinding.instance.addPostFrameCallback(
+      (_) => _focusNode.requestFocus(),
+    );
   }
 
   @override
@@ -138,11 +136,12 @@ class _AddPatientSheetState extends ConsumerState<AddPatientSheet> {
     );
   }
 
-  Widget _newCupertinoFormRow(String placeholder,
-      TextEditingController controller, {
-        TextInputType keyboardType = TextInputType.text,
-        focusNode,
-      }) {
+  Widget _newCupertinoFormRow(
+    String placeholder,
+    TextEditingController controller, {
+    TextInputType keyboardType = TextInputType.text,
+    focusNode,
+  }) {
     return CupertinoFormRow(
       child: CupertinoTextField(
         padding: EdgeInsets.symmetric(vertical: 6),
