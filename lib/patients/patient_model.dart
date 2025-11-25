@@ -3,6 +3,7 @@ final class PatientModel {
   final String firstName;
   final String lastName;
   final String? phoneNumber;
+  final DateTime? birthday;
   final bool isActive;
 
   PatientModel({
@@ -10,6 +11,7 @@ final class PatientModel {
     required this.firstName,
     required this.lastName,
     this.phoneNumber,
+    this.birthday,
     this.isActive = true,
   });
 }

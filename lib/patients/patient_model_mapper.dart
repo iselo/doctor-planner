@@ -10,6 +10,7 @@ extension PatientModelMapper on PatientModel {
       firstName: firstName,
       lastName: lastName,
       phoneNumber: Value(phoneNumber),
+      birthday: Value(birthday),
       isActive: Value(isActive),
     );
   }

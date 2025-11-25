@@ -1,6 +1,6 @@
 import 'package:drift/drift.dart';
-import '../patients/patients.dart';
 
+import '../patients/patients.dart';
 import 'platform/selector.dart';
 
 part 'app_database.g.dart';
@@ -12,5 +12,14 @@ class AppDatabase extends _$AppDatabase {
   AppDatabase() : super(Platform.createDatabaseConnection(AppDatabase._name));
 
   @override
-  int get schemaVersion => 1;
+  int get schemaVersion => 2;
+
+  @override
+  MigrationStrategy get migration => MigrationStrategy(
+    onUpgrade: (m, from, to) async {
+      if (from == 1) {
+        await m.addColumn(patients, patients.birthday);
+      }
+    },
+  );
 }

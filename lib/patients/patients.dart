@@ -9,6 +9,8 @@ class Patients extends Table {
 
   TextColumn get phoneNumber => text().nullable()();
 
+  DateTimeColumn get birthday => dateTime().nullable()();
+
   BoolColumn get isActive => boolean().withDefault(Constant(true))();
 
   @override

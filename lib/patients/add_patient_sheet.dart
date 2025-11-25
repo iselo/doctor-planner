@@ -1,6 +1,6 @@
+import 'package:doctor_planer/l10n/l10n_date_ext.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:intl/intl.dart';
 import 'package:uuid/uuid.dart';
 
 import '../data/database_provider.dart';
@@ -21,8 +21,9 @@ class _AddPatientSheetState extends ConsumerState<AddPatientSheet> {
   final _lastNameController = TextEditingController();
   final _phoneController = TextEditingController();
   final _focusNode = FocusNode();
-  DateTime? _selectedBirthday;
   final _uuid = Uuid();
+
+  DateTime? _selectedBirthday;
 
   @override
   void initState() {
@@ -53,7 +54,6 @@ class _AddPatientSheetState extends ConsumerState<AddPatientSheet> {
   @override
   Widget build(BuildContext context) {
     final l10nText = AppLocalizations.of(context)!;
-    var locale = DateFormat.yMMMd(Localizations.localeOf(context).toString());
     return CupertinoPageScaffold(
       backgroundColor: CupertinoColors.systemGrey6,
       navigationBar: CupertinoNavigationBar(
@@ -124,7 +124,8 @@ class _AddPatientSheetState extends ConsumerState<AddPatientSheet> {
                       child: Text(
                         _selectedBirthday == null
                             ? l10nText.addBirthday
-                            : locale.format(_selectedBirthday!),
+                            : _selectedBirthday!.toL10n(context),
+                        // : L10nDate.format(context, _selectedBirthday!),
                       ),
                     ),
                   ),
@@ -137,12 +138,11 @@ class _AddPatientSheetState extends ConsumerState<AddPatientSheet> {
     );
   }
 
-  Widget _newCupertinoFormRow(
-    String placeholder,
-    TextEditingController controller, {
-    TextInputType keyboardType = TextInputType.text,
-    focusNode,
-  }) {
+  Widget _newCupertinoFormRow(String placeholder,
+      TextEditingController controller, {
+        TextInputType keyboardType = TextInputType.text,
+        focusNode,
+      }) {
     return CupertinoFormRow(
       child: CupertinoTextField(
         padding: EdgeInsets.symmetric(vertical: 6),
@@ -190,15 +190,17 @@ class _AddPatientSheetState extends ConsumerState<AddPatientSheet> {
   Future<void> _onSave() async {
     final firstName = _firstNameController.text.trim();
     final lastName = _lastNameController.text.trim();
-    final phone = _phoneController.text.trim();
 
     if (firstName.isEmpty || lastName.isEmpty) return;
+
+    final phone = _phoneController.text.trim();
 
     final patient = PatientModel(
       id: _uuid.v4(),
       firstName: firstName,
       lastName: lastName,
       phoneNumber: phone.isEmpty ? null : phone,
+      birthday: _selectedBirthday,
     );
 
     final service = ref.read(

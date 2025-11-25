@@ -1,3 +1,5 @@
+import 'package:doctor_planer/l10n/l10n_date_ext.dart';
+import 'package:doctor_planer/patients/widget_optional_ext.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -37,26 +39,23 @@ class ViewPatientPage extends ConsumerWidget {
                 ),
                 SliverList(
                   delegate: SliverChildListDelegate([
-                    if (patient.phoneNumber?.isNotEmpty ?? false)
-                      CupertinoListSection.insetGrouped(
-                        margin: EdgeInsets.symmetric(
-                          horizontal: 16,
-                          vertical: 8,
-                        ),
-                        children: [
-                          CupertinoListTile(
-                            padding: EdgeInsets.all(16),
-                            title: Text(l10nText.phoneNumber.toLowerCase()),
-                            subtitle: Text(
-                              patient.phoneNumber!,
-                              style: CupertinoTheme.of(context)
-                                  .textTheme
-                                  .textStyle
-                                  .copyWith(color: CupertinoColors.link),
-                            ),
+                    CupertinoListSection.insetGrouped(
+                      margin: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                      children: [
+                        CupertinoListTile(
+                          padding: EdgeInsets.all(16),
+                          title: Text(l10nText.phoneNumber.toLowerCase()),
+                          subtitle: Text(
+                            patient.phoneNumber!,
+                            style: CupertinoTheme.of(context)
+                                .textTheme
+                                .textStyle
+                                .copyWith(color: CupertinoColors.link),
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
+                    ).visibleIf(patient.phoneNumber!.isNotEmpty),
+
                     CupertinoListSection.insetGrouped(
                       margin: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                       children: [
@@ -64,7 +63,7 @@ class ViewPatientPage extends ConsumerWidget {
                           padding: EdgeInsets.all(16),
                           title: Text(l10nText.birthday),
                           subtitle: Text(
-                            "16 October 2000",
+                            patient.birthday!.toL10n(context),
                             style: CupertinoTheme.of(context)
                                 .textTheme
                                 .textStyle
@@ -72,55 +71,8 @@ class ViewPatientPage extends ConsumerWidget {
                           ),
                         ),
                       ],
-                    ),
-                    CupertinoListSection.insetGrouped(
-                      margin: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                      children: [
-                        CupertinoListTile(
-                          padding: EdgeInsets.all(16),
-                          title: Text("section"),
-                          subtitle: Text(
-                            "Some Data",
-                            style: CupertinoTheme.of(context)
-                                .textTheme
-                                .textStyle
-                                .copyWith(color: CupertinoColors.link),
-                          ),
-                        ),
-                      ],
-                    ),
-                    CupertinoListSection.insetGrouped(
-                      margin: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                      children: [
-                        CupertinoListTile(
-                          padding: EdgeInsets.all(16),
-                          title: Text("another section"),
-                          subtitle: Text(
-                            "Some Data",
-                            style: CupertinoTheme.of(context)
-                                .textTheme
-                                .textStyle
-                                .copyWith(color: CupertinoColors.link),
-                          ),
-                        ),
-                      ],
-                    ),
-                    CupertinoListSection.insetGrouped(
-                      margin: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                      children: [
-                        CupertinoListTile(
-                          padding: EdgeInsets.all(16),
-                          title: Text("one more section"),
-                          subtitle: Text(
-                            "Some Data",
-                            style: CupertinoTheme.of(context)
-                                .textTheme
-                                .textStyle
-                                .copyWith(color: CupertinoColors.link),
-                          ),
-                        ),
-                      ],
-                    ),
+                    ).visibleIf(patient.birthday != null),
+
                     CupertinoListSection.insetGrouped(
                       margin: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                       children: [
